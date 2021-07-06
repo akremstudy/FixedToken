@@ -23,6 +23,7 @@ def test_after_five(accounts,token):
     token.claim()
     assert token.totalSupply() == 1e25
 
+# Check minting of each second
 def test_seconds(accounts,token):
     first=token.lastClaimedAt()
     token.claim()
@@ -30,4 +31,3 @@ def test_seconds(accounts,token):
     supply = token.totalSupply()
     diff = second - first
     assert diff *(1e7/157784630) == supply/1e18
-#  test the amount in seconds how much each second
