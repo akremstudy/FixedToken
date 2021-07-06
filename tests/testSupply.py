@@ -1,9 +1,7 @@
 from brownie import chain
-import time 
 # Supply in 5 years 1e7 + 1e18
 def test_five_years(accounts,token):
     chain.sleep(157784630)
-    time.sleep(1)
     token.claim()
     assert token.totalSupply() == 1e25
 
