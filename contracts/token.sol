@@ -12,13 +12,11 @@ contract DEMO is ERC20, ERC20Detailed, Ownable{
     uint256 public currentSupply=0;
     uint256 public maxSupply=1e25;//10 million maximum supply
     uint256 fixedTime=157784630;// 5 years in seconds
-    uint256 elapsedTime;
      
 
     constructor () public ERC20Detailed("DEMO", "DM", 18) {
         ownerAddress=msg.sender;
         lastClaimedAt=block.timestamp;
-        elapsedTime=block.timestamp.sub(lastClaimedAt);
     }
 
     function claim() public payable onlyOwner {
@@ -26,7 +24,7 @@ contract DEMO is ERC20, ERC20Detailed, Ownable{
         uint256 total=maxSupply.sub(currentSupply);
         uint256 mintAmount=total.div(fixedTime);
         uint256 tokens;
-        elapsedTime=block.timestamp.sub(lastClaimedAt);
+        uint256 elapsedTime=block.timestamp.sub(lastClaimedAt);
         if (fixedTime>elapsedTime) {
             tokens=mintAmount.mul(elapsedTime);
             fixedTime=fixedTime.sub(elapsedTime);
